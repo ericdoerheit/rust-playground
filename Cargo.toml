@@ -1,0 +1,12 @@
+[package]
+name = "rust-playground"
+version = "0.1.0"
+authors = ["Eric Dörheit <eric.doerheit@me.com>"]
+edition = "2018"
+
+[dependencies]
+actix = "0.10"
+actix-web = "3"
+actix-web-actors = "3"
+regex = "1"
+ndarray = "0.14"
