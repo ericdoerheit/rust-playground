@@ -12,3 +12,5 @@ egui_commonmark = { version = "0.9", default-features = false }
 egui_extras = { version = "0.23.0", features = ["http", "image", "puffin"] }
 env_logger = "0.10"
 log = { version = "0.4.20", features = [] }
+arrow = { version = "48.0.0" }
+parquet = { version = "48.0.0" }
