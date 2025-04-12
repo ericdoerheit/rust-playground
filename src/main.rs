@@ -1,6 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
 mod datatypes;
+mod test_polars_scan_parquet_hive;
 
 use std::any::Any;
 use std::fmt::format;
@@ -8,7 +9,7 @@ use std::fs::File;
 use std::ops::Deref;
 use arrow::array::{Array, Float16Array, Float32Array, Float64Array, Int32Array, Int64Array, UInt16Array, UInt32Array, UInt64Array, UInt8Array};
 use eframe::egui;
-use egui::{FontData, FontDefinitions, FontFamily, FontId, TextStyle};
+use egui::{FontData, FontDefinitions, FontFamily, FontId, menu, TextStyle};
 use egui_extras::{Column, TableBuilder};
 use log::{debug, error};
 use parquet::arrow::arrow_reader::ParquetRecordBatchReaderBuilder;
@@ -226,6 +227,33 @@ impl Default for MyApp {
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+
+        egui::TopBottomPanel::top("top_panel")
+            .resizable(false)
+            // .min_height(32.0)
+            .show(ctx, |ui| {
+                egui::ScrollArea::vertical().show(ui, |ui| {
+
+                    menu::bar(ui, |ui| {
+                        ui.menu_button("File", |ui| {
+                            if ui.button("Open").clicked() {
+                                // Open file dialog
+
+                            }
+
+                            if ui.button("Exit").clicked() {
+                                // Stop the application
+                                _frame.close();
+                            }
+                        });
+                    });
+
+                    // ui.vertical_centered(|ui| {
+                    //     ui.heading("Expandable Upper Panel");
+                    // });
+                });
+            });
+
         egui::CentralPanel::default().show(ctx, |ui| {
             // egui::ScrollArea::both().auto_shrink([false, false]).show(ui, |ui| {
                 let mut table = TableBuilder::new(ui)
